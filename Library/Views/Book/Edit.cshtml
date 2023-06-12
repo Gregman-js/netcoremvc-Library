@@ -1,0 +1,50 @@
+@model BookModel
+
+@{
+    ViewData["Title"] = "Edytuj - " + Model.Title;
+}
+
+<main class="container">
+    <div class="py-5 text-center">
+        <h2>Nowa książka</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 col-lg-8">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="ID" />
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label"></label>
+                    <input asp-for="Title" class="form-control"/>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Author" class="form-label"></label>
+                    <input asp-for="Author" class="form-control"/>
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Isbn" class="form-label"></label>
+                    <input asp-for="Isbn" class="form-control"/>
+                    <span asp-validation-for="Isbn" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Year" class="form-label"></label>
+                    <input asp-for="Year" class="form-control" type="number" min="1900" max="2030" step="1" value="2010"/>
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Zapisz</button>
+            </form>
+        </div>
+    </div>
+</main>

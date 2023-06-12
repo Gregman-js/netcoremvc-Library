@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Library.Models.BookModel>
+
+@{
+    ViewData["Title"] = "Lista książek";
+}
+
+<main class="container">
+    <div class="text-center">
+        <h1 class="display-4">Książki</h1>
+        <p>Dodawaj, edytuj oraz usuwaj książki.</p>
+        <a type="button" class="btn btn-primary" asp-controller="Book" asp-action="Add">Dodaj książkę</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Isbn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-book-id="@item.ID">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Isbn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-placement="top"
+                        data-bs-content="@Html.DisplayFor(modelItem => item.Description)"
+                    >
+                        @Html.DisplayNameFor(model => model.Description)
+                    </button>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edytuj</a> |
+                    <a id="removeBookButton" href="#">Usuń</a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <td colspan="5" class="text-center">
+                Brak książek
+            </td>
+        }
+        </tbody>
+    </table>
+</main>
+<div class="modal fade" tabindex="-1" id="removeBookModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuń książkę</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Czy na pewno chcesz usunąć tą książkę.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cofnij</button>
+                <a type="button" class="btn btn-danger" id="removeBookModalButton">Usuń</a>
+            </div>
+        </div>
+    </div>
+</div>
