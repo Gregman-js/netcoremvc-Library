@@ -16,6 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<BookManager>();
+builder.Services.AddTransient<ClientManager>();
 
 var app = builder.Build();
 

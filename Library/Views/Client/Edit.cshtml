@@ -1,0 +1,40 @@
+@model ClientModel
+
+@{
+    ViewData["Title"] = "Edytuj - " + Model.Firstname + " " + Model.Lastname;
+}
+
+<main class="container">
+    <div class="py-5 text-center">
+        <h2>Nowa książka</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 col-lg-8">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="ID" />
+                <div class="mb-3">
+                    <label asp-for="Pesel" class="form-label"></label>
+                    <input asp-for="Pesel" class="form-control" />
+                    <span asp-validation-for="Pesel" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Firstname" class="form-label"></label>
+                    <input asp-for="Firstname" class="form-control" />
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Lastname" class="form-label"></label>
+                    <input asp-for="Lastname" class="form-control" />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Zapisz</button>
+            </form>
+        </div>
+    </div>
+</main>

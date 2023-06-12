@@ -35,7 +35,7 @@
         <tbody>
         @foreach (var item in Model)
         {
-            <tr data-book-id="@item.ID">
+            <tr data-model-id="@item.ID">
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
@@ -62,7 +62,7 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edytuj</a> |
-                    <a id="removeBookButton" href="#">Usuń</a>
+                    <a id="removeButton" href="#">Usuń</a>
                 </td>
             </tr>
         }
@@ -75,7 +75,7 @@
         </tbody>
     </table>
 </main>
-<div class="modal fade" tabindex="-1" id="removeBookModal">
+<div class="modal fade" tabindex="-1" id="removeModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -87,7 +87,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cofnij</button>
-                <a type="button" class="btn btn-danger" id="removeBookModalButton">Usuń</a>
+                <a type="button" class="btn btn-danger" id="removeModalButton">Usuń</a>
             </div>
         </div>
     </div>

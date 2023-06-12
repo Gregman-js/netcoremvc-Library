@@ -3,9 +3,9 @@
 
 
 function initRemoveModal() {
-    const modalElement = document.querySelector('#removeBookModal');
-    const confirmElement = document.querySelector('#removeBookModalButton');
-    const trigger = document.querySelector('#removeBookButton');
+    const modalElement = document.querySelector('#removeModal');
+    const confirmElement = document.querySelector('#removeModalButton');
+    const trigger = document.querySelector('#removeButton');
     
     if (!modalElement || !trigger || !confirmElement) {
         return;
@@ -14,13 +14,13 @@ function initRemoveModal() {
     const modal = new bootstrap.Modal(modalElement)
 
     trigger.addEventListener('click', e => {
-        const bookId = e.currentTarget.parentElement.parentElement.dataset.bookId || null;
+        const modelId = e.currentTarget.parentElement.parentElement.dataset.modelId || null;
         
-        if (!bookId) {
+        if (!modelId) {
             return;
         }
 
-        confirmElement.href = '/Book/Remove/' + bookId;
+        confirmElement.href = '/Book/Remove/' + modelId;
 
         modal.show();
     });

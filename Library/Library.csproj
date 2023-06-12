@@ -21,4 +21,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Client\Add.cshtml" />
+      <AdditionalFiles Include="Views\Client\Edit.cshtml" />
+      <AdditionalFiles Include="Views\Client\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

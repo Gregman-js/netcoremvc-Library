@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers;
 
-public class BookController : Controller
+public class ClientController : Controller
 {
-    private BookManager _bookManager;
+    private ClientManager _clientManager;
 
-    public BookController(BookManager bookManager)
+    public ClientController(ClientManager clientManager)
     {
-        _bookManager = bookManager;
+        _clientManager = clientManager;
     }
     public IActionResult Index()
     {
-        var books = _bookManager.GetBooks();
-        return View(books);
+        var clients = _clientManager.GetClients();
+        return View(clients);
     }
     
     [HttpGet]
@@ -25,47 +25,47 @@ public class BookController : Controller
     }
     
     [HttpPost]
-    public IActionResult Add(BookModel book)
+    public IActionResult Add(ClientModel client)
     {
         if (!ModelState.IsValid)
         {
-            return View(book);
+            return View(client);
         }
 
         try
         {
-            _bookManager.AddBook(book);
+            _clientManager.AddClient(client);
             return RedirectToAction("Index");
         }
         catch (Exception)
         {
-            return View(book);
+            return View(client);
         }
     }
     
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var book = _bookManager.GetBook(id);
-        return View(book);
+        var client = _clientManager.GetClient(id);
+        return View(client);
     }
 
     [HttpPost]
-    public IActionResult Edit(BookModel book)
+    public IActionResult Edit(ClientModel client)
     {
         if (!ModelState.IsValid)
         {
-            return View(book);
+            return View(client);
         }
 
-        _bookManager.UpdateBook(book);
+        _clientManager.UpdateClient(client);
         return RedirectToAction("Index");
     }
     
     [HttpGet]
     public IActionResult Remove(int id)
     {
-        _bookManager.RemoveBook(id);
+        _clientManager.RemoveClient(id);
 
         return RedirectToAction("Index");
 
