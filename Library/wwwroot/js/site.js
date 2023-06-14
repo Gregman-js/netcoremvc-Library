@@ -26,9 +26,15 @@ function initRemoveModal() {
     });
 }
 
+function initTooltips() {
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        .forEach(el => new bootstrap.Tooltip(el));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-bs-toggle="popover"]')
-        .forEach(e => new bootstrap.Popover(e));
+        .forEach(el => new bootstrap.Popover(el));
 
     initRemoveModal();
+    initTooltips();
 })

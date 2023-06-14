@@ -17,4 +17,9 @@ public class ClientModel
     [Display(Name = "Nazwisko")]
     [Required(ErrorMessage = "Nazwisko jest wymagane")]
     public string Lastname { get; set; }
+
+    public string Fullname => Firstname + " " + Lastname;
+
+    [Display(Name = "Wypożyczenia")]
+    public ICollection<RentModel> Rents { get; set; } = new List<RentModel>();
 }

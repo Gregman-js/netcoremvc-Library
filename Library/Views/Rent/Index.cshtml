@@ -1,0 +1,93 @@
+﻿@using Library.Enum
+@model IEnumerable<Library.Models.RentModel>
+
+
+@{
+    ViewData["Title"] = "Lista wypożyczeń";
+}
+
+<main class="container">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Wypożyczenia</h1>
+        <p>Dodawaj, edytuj oraz usuwaj wypożyczenia.</p>
+        <a type="button" class="btn btn-primary" asp-controller="Rent" asp-action="Add">Nowe wypożyczenie</a>
+    </div>
+
+    <table class="table table-striped align-middle">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-model-id="@item.ID">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentDate)
+                </td>
+                <td>
+                    @if (item.Status == RentStatusEnum.Open)
+                    {
+                        <a asp-action="Close" asp-route-id="@item.ID">
+                            <span class="badge bg-warning" data-bs-toggle="tooltip" data-bs-title="Zamknij">
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </span>
+                    }
+                </td>
+                <td>
+                    <a id="removeButton" href="#" class="btn btn-sm btn-outline-danger">Usuń</a>
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <td colspan="5" class="text-center">
+                Brak wypożyczeń
+            </td>
+        }
+        </tbody>
+    </table>
+</main>
+<div class="modal fade" tabindex="-1" id="removeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuń wypożyczenie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Czy na pewno chcesz usunąć to wypożyczenie.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cofnij</button>
+                <a type="button" class="btn btn-danger" id="removeModalButton">Usuń</a>
+            </div>
+        </div>
+    </div>
+</div>

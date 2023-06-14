@@ -14,7 +14,7 @@ public class ClientController : Controller
     }
     public IActionResult Index()
     {
-        var clients = _clientManager.GetClients();
+        var clients = _clientManager.GetClientsWithRentedBooks();
         return View(clients);
     }
     

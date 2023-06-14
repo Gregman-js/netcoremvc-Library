@@ -13,4 +13,5 @@ public class ApplicationDbContext : IdentityDbContext
     
     public DbSet<BookModel> Books { get; set; }
     public DbSet<ClientModel> Clients { get; set; }
+    public DbSet<RentModel> Rents { get; set; }
 }

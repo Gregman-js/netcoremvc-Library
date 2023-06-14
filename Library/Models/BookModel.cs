@@ -25,4 +25,7 @@ public class BookModel
     [Display(Name = "Rok publikacji")]
     [RegularExpression(@"^[12][0-9]{3}$", ErrorMessage = "Wprowadź poprawny rok"), Required] 
     public int Year { get; set; }
+
+    [Display(Name = "Dostępna")]
+    public ICollection<RentModel> Rents { get; set; } = new List<RentModel>();
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Library.Models.ClientModel>
+﻿@using Library.Enum
+@model IEnumerable<Library.Models.ClientModel>
 
 
 @{
@@ -6,23 +7,23 @@
 }
 
 <main class="container">
-    <div class="text-center">
+    <div class="text-center mb-5">
         <h1 class="display-4">Klienci</h1>
         <p>Dodawaj, edytuj oraz usuwaj klientów.</p>
         <a type="button" class="btn btn-primary" asp-controller="Client" asp-action="Add">Dodaj klienta</a>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped align-middle">
         <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Pesel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Firstname)
+                @Html.DisplayNameFor(model => model.Fullname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lastname)
+                @Html.DisplayNameFor(model => model.Rents)
             </th>
             <th></th>
         </tr>
@@ -35,14 +36,24 @@
                     @Html.DisplayFor(modelItem => item.Pesel)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Firstname)
+                    @Html.DisplayFor(modelItem => item.Fullname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Lastname)
+                    @{
+                        var rentedCount = item.Rents.Count(r => r.Status != RentStatusEnum.Closed);
+                    }
+                    @if (rentedCount == 0)
+                    {
+                        <span class="badge bg-success">Brak</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-black" data-bs-toggle="tooltip" data-html="true" data-bs-title="@Html.Raw(string.Join(", ", item.Rents.Select(r => r.Book.Title.Replace(" ", "&nbsp;"))))">@rentedCount</span>
+                    }
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edytuj</a> |
-                    <a id="removeButton" href="#">Usuń</a>
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-link">Edytuj</a> |
+                    <a id="removeButton" class="btn btn-link" href="#">Usuń</a>
                 </td>
             </tr>
         }

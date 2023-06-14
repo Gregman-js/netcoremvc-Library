@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Library.Data;
@@ -17,6 +18,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<BookManager>();
 builder.Services.AddTransient<ClientManager>();
+builder.Services.AddTransient<RentManager>();
+
+var culture = new CultureInfo("pl-PL");
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 var app = builder.Build();
 

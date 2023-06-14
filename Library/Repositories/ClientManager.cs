@@ -1,5 +1,6 @@
 ﻿using Library.Data;
 using Library.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Repositories;
 
@@ -49,13 +50,22 @@ public class ClientManager
 
     public ClientModel GetClient(int id)
     {
-        var client = _context.Clients.SingleOrDefault(film => film.ID == id);
+        var client = _context.Clients.SingleOrDefault(c => c.ID == id);
         return client;
     }
 
     public List<ClientModel> GetClients()
     {
         var clients = _context.Clients.ToList();
+        return clients;
+    }
+
+    public List<ClientModel> GetClientsWithRentedBooks()
+    {
+        var clients = _context.Clients
+            .Include(c => c.Rents)
+            .ThenInclude(r => r.Book)
+            .ToList();
         return clients;
     }
 }

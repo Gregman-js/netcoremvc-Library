@@ -14,7 +14,7 @@ public class BookController : Controller
     }
     public IActionResult Index()
     {
-        var books = _bookManager.GetBooks();
+        var books = _bookManager.GetBooksWithCurrentClient();
         return View(books);
     }
     
