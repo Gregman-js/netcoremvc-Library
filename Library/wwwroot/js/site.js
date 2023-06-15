@@ -5,17 +5,17 @@
 function initRemoveModal() {
     const modalElement = document.querySelector('#removeModal');
     const confirmElement = document.querySelector('#removeModalButton');
-    const trigger = document.querySelector('#removeButton');
+    const trigger = document.querySelectorAll('#removeButton');
     
-    if (!modalElement || !trigger || !confirmElement) {
+    if (!modalElement || !trigger.length || !confirmElement) {
         return;
     }
 
     const modal = new bootstrap.Modal(modalElement)
 
-    trigger.addEventListener('click', e => {
-        const modelId = e.currentTarget.parentElement.parentElement.dataset.modelId || null;
-        
+    trigger.forEach(el => el.addEventListener('click', e => {
+        const modelId = e.currentTarget.dataset.modelId || e.currentTarget.parentElement.parentElement.dataset.modelId || null;
+
         if (!modelId) {
             return;
         }
@@ -23,7 +23,7 @@ function initRemoveModal() {
         confirmElement.href = '/Book/Remove/' + modelId;
 
         modal.show();
-    });
+    }));
 }
 
 function initTooltips() {

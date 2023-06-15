@@ -69,14 +69,15 @@
                     }
                     @if (rentedBook != null)
                     {
-                        <span class="badge bg-danger" data-bs-toggle="tooltip" data-bs-title="Wypożyczone przez @rentedBook.Client.Fullname">Nie</span>
+                        <span class="badge bg-danger" data-bs-toggle="tooltip" data-bs-title="Wypożyczone przez @rentedBook.Client.Fullname">Wypożyczone</span>
                     }
                     else
                     {
-                        <span class="badge bg-success">Tak</span>
+                        <span class="badge bg-success">Dostępne</span>
                     }
                 </td>
                 <td>
+                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-link">Szczegóły</a> |
                     <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-link">Edytuj</a> |
                     <a class="btn btn-link @(item.Rents.Any() ? "disabled" : "")" id="removeButton" href="#">Usuń</a>
                 </td>

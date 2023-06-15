@@ -18,6 +18,17 @@ public class BookController : Controller
         return View(books);
     }
     
+    public IActionResult Details(int id)
+    {
+        var book = _bookManager.GetBookWithClients(id);
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        return View(book);
+    }
+    
     [HttpGet]
     public IActionResult Add()
     {

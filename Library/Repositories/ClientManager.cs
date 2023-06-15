@@ -48,7 +48,7 @@ public class ClientManager
         return this;
     }
 
-    public ClientModel GetClient(int id)
+    public ClientModel? GetClient(int id)
     {
         var client = _context.Clients.SingleOrDefault(c => c.ID == id);
         return client;

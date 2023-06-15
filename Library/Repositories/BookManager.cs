@@ -49,9 +49,15 @@ public class BookManager
         return this;
     }
 
-    public BookModel GetBook(int id)
+    public BookModel? GetBook(int id)
     {
         var book = _context.Books.SingleOrDefault(b => b.ID == id);
+        return book;
+    }
+
+    public BookModel? GetBookWithClients(int id)
+    {
+        var book = _context.Books.Include(b => b.Rents).ThenInclude(r => r.Client).SingleOrDefault(b => b.ID == id);
         return book;
     }
 

@@ -1,0 +1,70 @@
+@model Library.Models.BookModel
+
+@{
+    ViewData["Title"] = "Szczegóły - " + Model.Title;
+}
+
+<main class="container">
+    <div class="py-5 text-center">
+        <h2>Szczegóły książki</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 col-lg-8">
+            <dl class="row">
+                <dt class="col-sm-3">Tytuł:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+                <dt class="col-sm-3">Autor:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Author)</dd>
+
+                <dt class="col-sm-3">ISBN:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Isbn)</dd>
+
+                <dt class="col-sm-3">Opis:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+
+                <dt class="col-sm-3">Rok publikacji:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Year)</dd>
+
+                <dt class="col-sm-3">Status:</dt>
+                <dd class="col-sm-9">
+                    @{
+                        var rentedBook = Model.Rents.FirstOrDefault();
+                    }
+                    @if (rentedBook != null)
+                    {
+                        <span class="badge bg-danger" data-bs-toggle="tooltip" data-bs-title="Wypożyczone przez @rentedBook.Client.Fullname">Nie</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Tak</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+                <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Edytuj</a>
+                <a class="btn btn-danger @(Model.Rents.Any() ? "disabled" : "")" id="removeButton" href="#" data-model-id="@Model.ID">Usuń</a>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="modal fade" tabindex="-1" id="removeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuń książkę</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Czy na pewno chcesz usunąć tą książkę.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cofnij</button>
+                <a type="button" class="btn btn-danger" id="removeModalButton">Usuń</a>
+            </div>
+        </div>
+    </div>
+</div>

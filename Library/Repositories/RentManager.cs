@@ -47,7 +47,7 @@ public class RentManager
         return this;
     }
 
-    public RentModel GetRent(int id)
+    public RentModel? GetRent(int id)
     {
         var rent = _context.Rents.SingleOrDefault(r => r.ID == id);
         return rent;
